@@ -1,3 +1,8 @@
 /* #input {
   font-size: xx-large;
 } */
+
+.input {
+  display: flex;
+  flex-direction: row;
+}
