@@ -1,4 +1,4 @@
-<div class="title">Countdown Until</div>
+<div class="title">Countdown To</div>
 <div class="input">
   <div class="monthDiv">
     <select name="months" (change)="setMonth($event)" id="month">
@@ -25,11 +25,11 @@
   <div class="hourDiv">
     <input type="number" min="0" max="23" value="0" (change)="setHour($event)" id="hour">
   </div>
-  <div>:</div>
+  <div>HR:</div>
   <div class="minuteDiv">
     <input type="number" min="0" max="59" value="0" (change)="setMinute($event)" id="minute">
   </div>
-  <div>:</div>
+  <div>MIN:</div>
   <div class="secondDiv">
     <input type="number" min="0" max="59" value="0" (change)="setSecond($event)" id="second">
   </div>

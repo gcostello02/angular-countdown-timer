@@ -122,10 +122,17 @@ export class AppComponent {
   updateSeconds() {
     this.currentDate = new Date();
     this.secondsBetween = Math.floor((this.targetDate.getTime() - this.currentDate.getTime())/1000);
-    this.daysLeft = Math.floor(this.secondsBetween / 86400);
-    this.hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600);
-    this.minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60);
-    this.secondsLeft = ((this.secondsBetween % 86400) % 3600) % 60;
+    if(this.secondsBetween <= 0){
+      this.daysLeft = 0;
+      this.hoursLeft = 0;
+      this.minutesLeft = 0;
+      this.secondsLeft = 0;
+    } else {
+      this.daysLeft = Math.floor(this.secondsBetween / 86400);
+      this.hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600);
+      this.minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60);
+      this.secondsLeft = ((this.secondsBetween % 86400) % 3600) % 60;
+    }
   }
 
   update = setInterval(() => {
