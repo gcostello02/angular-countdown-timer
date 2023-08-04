@@ -2,7 +2,12 @@
   font-size: xx-large;
 } */
 
-.input {
+.dayinput {
+  display: flex;
+  flex-direction: row;
+}
+
+.timeinput {
   display: flex;
   flex-direction: row;
 }

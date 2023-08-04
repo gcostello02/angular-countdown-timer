@@ -7,13 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-countdown-timer';
-  targetDate: Date = new Date(2024, 0, 1, 0, 0);
+  targetDate: Date = new Date(new Date().getFullYear()+1, 0, 1, 0, 0);
   currentDate: Date = new Date();
   secondsBetween: number = Math.floor((this.targetDate.getTime() - this.currentDate.getTime())/1000);
   daysLeft = Math.floor(this.secondsBetween / 86400);
   hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600);
   minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60);
   secondsLeft = ((this.secondsBetween % 86400) % 3600) % 60;
+  displaying: boolean = false;
 
   setMonth(event: any) {
     if(event.target.value == 1 && this.targetDate.getDate() >= 29) {
@@ -34,7 +35,6 @@ export class AppComponent {
       this.targetDate.setMonth(event.target.value);
     }
     console.log(this.targetDate);
-    this.updateSeconds();
   }
 
   setDay(event: any) {
@@ -58,12 +58,10 @@ export class AppComponent {
         let dayInput = document.getElementById("day") as HTMLInputElement | null;
         dayInput ? dayInput.value = this.targetDate.getDate().toString() : null;
       }
-
     else {
       this.targetDate.setDate(event.target.value);
     }
     console.log(this.targetDate);
-    this.updateSeconds();
   }
 
   setYear(event: any) {
@@ -79,7 +77,6 @@ export class AppComponent {
     } else {
       this.targetDate.setFullYear(event.target.value);
       console.log(this.targetDate);
-      this.updateSeconds();
     }
   }
 
@@ -91,7 +88,6 @@ export class AppComponent {
     } else {
       this.targetDate.setHours(event.target.value);
       console.log(this.targetDate);
-      this.updateSeconds();
     }
   }
 
@@ -103,7 +99,6 @@ export class AppComponent {
     } else {
       this.targetDate.setMinutes(event.target.value);
       console.log(this.targetDate);
-      this.updateSeconds();
     }
   }
 
@@ -115,7 +110,6 @@ export class AppComponent {
     } else {
       this.targetDate.setSeconds(event.target.value);
       console.log(this.targetDate);
-      this.updateSeconds();
     }
   }
 
@@ -135,8 +129,15 @@ export class AppComponent {
     }
   }
 
-  update = setInterval(() => {
-    this.updateSeconds();
-  }, 1000);
+  calculate() {
+    this.displaying = true;
+    setInterval(() => {
+      this.updateSeconds();
+    }, 1000);
+  }
+
+  changeInput() {
+    this.displaying = false;
+  }
 
 }

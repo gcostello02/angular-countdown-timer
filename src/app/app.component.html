@@ -1,42 +1,49 @@
 <div class="title">Countdown To</div>
-<div class="input">
-  <div class="monthDiv">
-    <select name="months" (change)="setMonth($event)" id="month">
-      <option value="0">Jan</option>
-      <option value="1">Feb</option>
-      <option value="2">Mar</option>
-      <option value="3">Apr</option>
-      <option value="4">May</option>
-      <option value="5">Jun</option>
-      <option value="6">Jul</option>
-      <option value="7">Aug</option>
-      <option value="8">Sep</option>
-      <option value="9">Oct</option>
-      <option value="10">Nov</option>
-      <option value="11">Dec</option>
-    </select>
+<div class="input" *ngIf="!displaying">
+  <div class="dayinput">
+    <div class="monthDiv">
+      <select name="months" (change)="setMonth($event)" id="month">
+        <option value="0">Jan</option>
+        <option value="1">Feb</option>
+        <option value="2">Mar</option>
+        <option value="3">Apr</option>
+        <option value="4">May</option>
+        <option value="5">Jun</option>
+        <option value="6">Jul</option>
+        <option value="7">Aug</option>
+        <option value="8">Sep</option>
+        <option value="9">Oct</option>
+        <option value="10">Nov</option>
+        <option value="11">Dec</option>
+      </select>
+    </div>
+    <div class="dayDiv">
+      <input type="number" min="1" max="31" value="1" (change)="setDay($event)" id="day">
+    </div>
+    <div class="yearDiv">
+      <input type="number" min="new Date().getFullYear()" max="2037" value="2024" (change)="setYear($event)" id="year">
+    </div>
   </div>
-  <div class="dayDiv">
-    <input type="number" min="1" max="31" value="1" (change)="setDay($event)" id="day">
+  <div class="timeinput">
+    <div class="hourDiv">
+      <input type="number" min="0" max="23" value="0" (change)="setHour($event)" id="hour">
+    </div>
+    <div>HR:</div>
+    <div class="minuteDiv">
+      <input type="number" min="0" max="59" value="0" (change)="setMinute($event)" id="minute">
+    </div>
+    <div>MIN:</div>
+    <div class="secondDiv">
+      <input type="number" min="0" max="59" value="0" (change)="setSecond($event)" id="second">
+    </div>
+    <div>SEC</div>
   </div>
-  <div class="yearDiv">
-    <input type="number" min="2023" max="2037" value="2024" (change)="setYear($event)" id="year">
-  </div>
-  <div class="hourDiv">
-    <input type="number" min="0" max="23" value="0" (change)="setHour($event)" id="hour">
-  </div>
-  <div>HR:</div>
-  <div class="minuteDiv">
-    <input type="number" min="0" max="59" value="0" (change)="setMinute($event)" id="minute">
-  </div>
-  <div>MIN:</div>
-  <div class="secondDiv">
-    <input type="number" min="0" max="59" value="0" (change)="setSecond($event)" id="second">
-  </div>
+  <button (click)="calculate()">Calculate</button>
 </div>
-<div class="display">
+<div class="display" *ngIf="displaying">
   <app-number [numberDisplayed]="daysLeft"></app-number>
   <app-number [numberDisplayed]="hoursLeft"></app-number>
   <app-number [numberDisplayed]="minutesLeft"></app-number>
   <app-number [numberDisplayed]="secondsLeft"></app-number>
+  <button (click)="changeInput()">Change Date</button>
 </div>
