@@ -17,10 +17,10 @@ export class AppComponent {
   targetDate: Date = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
   currentDate: Date = new Date();
   secondsBetween: number = Math.floor((this.targetDate.getTime() - this.currentDate.getTime())/1000);
-  daysLeft = Math.floor(this.secondsBetween / 86400);
-  hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600);
-  minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60);
-  secondsLeft = ((this.secondsBetween % 86400) % 3600) % 60;
+  daysLeft = Math.floor(this.secondsBetween / 86400).toString();
+  hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600).toString().length === 1 ? '0' + Math.floor((this.secondsBetween % 86400) / 3600).toString() : Math.floor((this.secondsBetween % 86400) / 3600).toString();
+  minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString().length === 1 ? '0' + Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString() : Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString();
+  secondsLeft = (((this.secondsBetween % 86400) % 3600) % 60).toString().length === 1 ? '0' + (((this.secondsBetween % 86400) % 3600) % 60).toString() : (((this.secondsBetween % 86400) % 3600) % 60).toString();
   inputShowing: boolean = true;
 
   ngOnInit(): void {
@@ -160,15 +160,15 @@ export class AppComponent {
     this.currentDate = new Date();
     this.secondsBetween = Math.floor((this.targetDate.getTime() - this.currentDate.getTime())/1000);
     if(this.secondsBetween <= 0){
-      this.daysLeft = 0;
-      this.hoursLeft = 0;
-      this.minutesLeft = 0;
-      this.secondsLeft = 0;
+      this.daysLeft = '0';
+      this.hoursLeft = '0';
+      this.minutesLeft = '0';
+      this.secondsLeft = '0';
     } else {
-      this.daysLeft = Math.floor(this.secondsBetween / 86400);
-      this.hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600);
-      this.minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60);
-      this.secondsLeft = ((this.secondsBetween % 86400) % 3600) % 60;
+      this.daysLeft = Math.floor(this.secondsBetween / 86400).toString();
+      this.hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600).toString().length === 1 ? '0' + Math.floor((this.secondsBetween % 86400) / 3600).toString() : Math.floor((this.secondsBetween % 86400) / 3600).toString();
+      this.minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString().length === 1 ? '0' + Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString() : Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString();
+      this.secondsLeft = (((this.secondsBetween % 86400) % 3600) % 60).toString().length === 1 ? '0' + (((this.secondsBetween % 86400) % 3600) % 60).toString() : (((this.secondsBetween % 86400) % 3600) % 60).toString();
     }
   }
 

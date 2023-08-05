@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./number.component.css']
 })
 export class NumberComponent {
-  @Input() numberDisplayed?: number;
+  @Input() numberDisplayed?: string;
   @Input() title?: string;
 }
