@@ -1,5 +1,5 @@
 <div class="title">Countdown To</div>
-<div class="input" *ngIf="!displaying">
+<div class="input">
   <div class="dayinput">
     <div class="monthDiv">
       <select name="months" (change)="setMonth($event)" id="month">
@@ -40,10 +40,9 @@
   </div>
   <button (click)="calculate()">Calculate</button>
 </div>
-<div class="display" *ngIf="displaying">
+<div class="display">
   <app-number [numberDisplayed]="daysLeft"></app-number>
   <app-number [numberDisplayed]="hoursLeft"></app-number>
   <app-number [numberDisplayed]="minutesLeft"></app-number>
   <app-number [numberDisplayed]="secondsLeft"></app-number>
-  <button (click)="changeInput()">Change Date</button>
 </div>
