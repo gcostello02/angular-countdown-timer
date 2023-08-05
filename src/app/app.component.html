@@ -1,4 +1,4 @@
-<div class="title">Countdown To</div>
+<div class="title">TIME REMAINING UNTIL</div>
 <div class="input">
   <div class="dayinput">
     <div class="monthDiv">
@@ -38,11 +38,10 @@
     </div>
     <div>SEC</div>
   </div>
-  <button (click)="calculate()">Calculate</button>
 </div>
 <div class="display">
-  <app-number [numberDisplayed]="daysLeft"></app-number>
-  <app-number [numberDisplayed]="hoursLeft"></app-number>
-  <app-number [numberDisplayed]="minutesLeft"></app-number>
-  <app-number [numberDisplayed]="secondsLeft"></app-number>
+  <app-number [numberDisplayed]="daysLeft" [title]="'DAYS'"></app-number>
+  <app-number [numberDisplayed]="hoursLeft" [title]="'HRS'"></app-number>
+  <app-number [numberDisplayed]="minutesLeft" [title]="'MINS'"></app-number>
+  <app-number [numberDisplayed]="secondsLeft" [title]="'SECS'"></app-number>
 </div>

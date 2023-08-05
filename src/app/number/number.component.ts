@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class NumberComponent {
   @Input() numberDisplayed?: number;
+  @Input() title?: string;
 }

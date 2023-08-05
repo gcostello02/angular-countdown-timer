@@ -21,6 +21,7 @@ export class AppComponent {
   hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600);
   minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60);
   secondsLeft = ((this.secondsBetween % 86400) % 3600) % 60;
+  inputShowing: boolean = true;
 
   ngOnInit(): void {
     let yearInput = document.getElementById("year") as HTMLInputElement | null;
@@ -35,6 +36,7 @@ export class AppComponent {
     minuteInput ? minuteInput.value = this.targetDate.getMinutes().toString() : null;
     let secondInput = document.getElementById("second") as HTMLInputElement | null;
     secondInput ? secondInput.value = this.targetDate.getSeconds().toString() : null;
+    this.calculate();
   }
 
   setMonth(event: any) {
@@ -61,6 +63,7 @@ export class AppComponent {
       this.localStorageChange('month', event.target.value);
     }
     console.log(this.targetDate);
+    this.calculate();
   }
 
   setDay(event: any) {
@@ -92,6 +95,7 @@ export class AppComponent {
       this.localStorageChange('day', event.target.value);
     }
     console.log(this.targetDate);
+    this.calculate();
   }
 
   setYear(event: any) {
@@ -110,6 +114,7 @@ export class AppComponent {
       this.localStorageChange('year', event.target.value);
       console.log(this.targetDate);
     }
+    this.calculate();
   }
 
   setHour(event: any) {
@@ -122,6 +127,7 @@ export class AppComponent {
       this.localStorageChange('hour', event.target.value);
       console.log(this.targetDate);
     }
+    this.calculate();
   }
 
   setMinute(event: any) {
@@ -134,6 +140,7 @@ export class AppComponent {
       this.localStorageChange('minute', event.target.value);
       console.log(this.targetDate);
     }
+    this.calculate();
   }
 
   setSecond(event: any) {
@@ -146,6 +153,7 @@ export class AppComponent {
       this.localStorageChange('second', event.target.value);
       console.log(this.targetDate);
     }
+    this.calculate()
   }
 
   updateSeconds() {
