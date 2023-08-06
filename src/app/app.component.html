@@ -37,7 +37,15 @@
 </div>
 <div class="display">
   <app-number [numberDisplayed]="daysLeft" [title]="'DAYS'"></app-number>
-  <app-number [numberDisplayed]="hoursLeft" [title]="'HRS'"></app-number>
-  <app-number [numberDisplayed]="minutesLeft" [title]="'MINS'"></app-number>
-  <app-number [numberDisplayed]="secondsLeft" [title]="'SECS'"></app-number>
+  <app-number [numberDisplayed]="hoursLeft" [title]="'HOURS'"></app-number>
+  <app-number [numberDisplayed]="minutesLeft" [title]="'MINUTES'"></app-number>
+  <app-number [numberDisplayed]="secondsLeft" [title]="'SECONDS'"></app-number>
+</div>
+<br>
+<br>
+<div class="progress">
+  <div class="outside">
+    <div class="percent" [style.width.%]="barwidth"></div>
+  </div>
+  <div style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">{{ percentDisplay }}</div>
 </div>

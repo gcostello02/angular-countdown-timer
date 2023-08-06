@@ -15,12 +15,16 @@ export class AppComponent {
 
   targetDate: Date = new Date(this.year, this.month, this.day, this.hour, this.minute);
   currentDate: Date = new Date();
+  startingMilli: number = localStorage.getItem('start') ? parseInt(localStorage.getItem('start')!) : new Date().getTime();
   secondsBetween: number = Math.floor((this.targetDate.getTime() - this.currentDate.getTime())/1000);
   daysLeft = Math.floor(this.secondsBetween / 86400).toString();
   hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600).toString().length === 1 ? '0' + Math.floor((this.secondsBetween % 86400) / 3600).toString() : Math.floor((this.secondsBetween % 86400) / 3600).toString();
   minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString().length === 1 ? '0' + Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString() : Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString();
   secondsLeft = (((this.secondsBetween % 86400) % 3600) % 60).toString().length === 1 ? '0' + (((this.secondsBetween % 86400) % 3600) % 60).toString() : (((this.secondsBetween % 86400) % 3600) % 60).toString();
   inputShowing: boolean = true;
+  percentageComplete: number = 100;
+  percentDisplay: string = '100%';
+  barwidth = 100;
 
   ngOnInit(): void {
     let yearInput = document.getElementById("year") as HTMLInputElement | null;
@@ -71,12 +75,13 @@ export class AppComponent {
       this.localStorageChange('month', event.target.value);
     }
     console.log(this.targetDate);
+    this.startingMilli = new Date().getTime();
+    localStorage.setItem('start', this.startingMilli.toString());
     this.calculate();
   }
 
   setDay(event: any) {
     if(event.target.value < 1 || event.target.value > 31) {
-      alert("Invalid Day Input");
       let dayInput = document.getElementById("day") as HTMLInputElement | null;
       dayInput ? dayInput.value = this.targetDate.getDate().toString() : null;
     } else if (event.target.value >= 29 && this.targetDate.getMonth() == 1 && this.targetDate.getFullYear() % 4 == 0) {
@@ -84,11 +89,15 @@ export class AppComponent {
       this.localStorageChange('day', 29);
       let dayInput = document.getElementById("day") as HTMLInputElement | null;
       dayInput ? dayInput.value = this.targetDate.getDate().toString() : null;
+      this.startingMilli = new Date().getTime();
+      localStorage.setItem('start', this.startingMilli.toString());
     } else if (event.target.value >= 29 && this.targetDate.getMonth() == 1) {
       this.targetDate.setDate(28);
       this.localStorageChange('day', 28);
       let dayInput = document.getElementById("day") as HTMLInputElement | null;
       dayInput ? dayInput.value = this.targetDate.getDate().toString() : null;
+      this.startingMilli = new Date().getTime();
+      localStorage.setItem('start', this.startingMilli.toString());
     } else if ((event.target.value >= 31 && this.targetDate.getMonth() == 3) ||
       (event.target.value >= 31 && this.targetDate.getMonth() == 5) ||
       (event.target.value >= 31 && this.targetDate.getMonth() == 8) ||
@@ -97,10 +106,14 @@ export class AppComponent {
         this.localStorageChange('day', 30);
         let dayInput = document.getElementById("day") as HTMLInputElement | null;
         dayInput ? dayInput.value = this.targetDate.getDate().toString() : null;
+        this.startingMilli = new Date().getTime();
+        localStorage.setItem('start', this.startingMilli.toString());
       }
     else {
       this.targetDate.setDate(event.target.value);
       this.localStorageChange('day', event.target.value);
+      this.startingMilli = new Date().getTime();
+      localStorage.setItem('start', this.startingMilli.toString());
     }
     console.log(this.targetDate);
     this.calculate();
@@ -112,28 +125,32 @@ export class AppComponent {
       this.localStorageChange('day', 28);
       let dayInput = document.getElementById("day") as HTMLInputElement | null;
       dayInput ? dayInput.value = this.targetDate.getDate().toString() : null;
+      this.startingMilli = new Date().getTime();
+      localStorage.setItem('start', this.startingMilli.toString());
     }
     if(event.target.value < new Date().getFullYear()) {
-      alert("Invalid Year Input");
       let yearInput = document.getElementById("year") as HTMLInputElement | null;
       yearInput ? yearInput.value = this.targetDate.getFullYear().toString() : null;
     } else {
       this.targetDate.setFullYear(event.target.value);
       this.localStorageChange('year', event.target.value);
       console.log(this.targetDate);
+      this.startingMilli = new Date().getTime();
+      localStorage.setItem('start', this.startingMilli.toString());
     }
     this.calculate();
   }
 
   setHour(event: any) {
     if(event.target.value < 0 || event.target.value > 23) {
-      alert("Invalid Hour Input");
       let hourInput = document.getElementById("hour") as HTMLInputElement | null;
       hourInput ? hourInput.value = this.targetDate.getHours().toString() : null;
     } else {
       this.targetDate.setHours(event.target.value);
       this.localStorageChange('hour', event.target.value);
       console.log(this.targetDate);
+      this.startingMilli = new Date().getTime();
+      localStorage.setItem('start', this.startingMilli.toString());
     }
     if(this.targetDate.getHours() < 10){
       let hourInput = document.getElementById("hour") as HTMLInputElement | null;
@@ -144,13 +161,14 @@ export class AppComponent {
 
   setMinute(event: any) {
     if(event.target.value < 0 || event.target.value > 59) {
-      alert("Invalid Minute Input");
       let minuteInput = document.getElementById("minute") as HTMLInputElement | null;
       minuteInput ? minuteInput.value = this.targetDate.getMinutes().toString() : null;
     } else {
       this.targetDate.setMinutes(event.target.value);
       this.localStorageChange('minute', event.target.value);
       console.log(this.targetDate);
+      this.startingMilli = new Date().getTime();
+      localStorage.setItem('start', this.startingMilli.toString());
     }
     if(this.targetDate.getMinutes() < 10){
       let hourInput = document.getElementById("minute") as HTMLInputElement | null;
@@ -167,11 +185,17 @@ export class AppComponent {
       this.hoursLeft = '0';
       this.minutesLeft = '0';
       this.secondsLeft = '0';
+      this.percentageComplete = 0;
+      this.barwidth = 0;
+      this.percentDisplay = '0%';
     } else {
       this.daysLeft = Math.floor(this.secondsBetween / 86400).toString();
       this.hoursLeft = Math.floor((this.secondsBetween % 86400) / 3600).toString().length === 1 ? '0' + Math.floor((this.secondsBetween % 86400) / 3600).toString() : Math.floor((this.secondsBetween % 86400) / 3600).toString();
       this.minutesLeft = Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString().length === 1 ? '0' + Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString() : Math.floor(((this.secondsBetween % 86400) % 3600) / 60).toString();
       this.secondsLeft = (((this.secondsBetween % 86400) % 3600) % 60).toString().length === 1 ? '0' + (((this.secondsBetween % 86400) % 3600) % 60).toString() : (((this.secondsBetween % 86400) % 3600) % 60).toString();
+      this.percentageComplete = ((this.targetDate.getTime() - this.currentDate.getTime()) * 100)/(this.targetDate.getTime() - this.startingMilli);
+      this.barwidth = this.percentageComplete;
+      this.percentDisplay = this.percentageComplete.toFixed(2) + '%';
     }
   }
 
