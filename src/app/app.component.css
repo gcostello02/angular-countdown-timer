@@ -24,3 +24,57 @@
   font-size: 3vh;
 
 }
+
+.input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 7vh;
+}
+
+#month {
+  font-size: 5vh;
+  height: 100%;
+  border: none;
+  width: 13vh;
+}
+
+#day {
+  font-size: 5vh;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+  width: 8vh;
+}
+
+#year {
+  font-size: 5vh;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+  width: 16vh;
+}
+
+#day, #hour, #minute {
+  font-size: 5vh;
+  height: 100%;
+  overflow: hidden;
+  border: none;
+  width: 7vh;
+}
+
+.dots {
+  font-size: 5vh;
+  font-family: sans-serif;
+}
+
+.at {
+  font-size: 5vh;
+  width: 10vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+

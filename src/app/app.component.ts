@@ -12,9 +12,8 @@ export class AppComponent {
   day: number = localStorage.getItem('day') ? parseInt(localStorage.getItem('day')!) : 1;
   hour: number = localStorage.getItem('hour') ? parseInt(localStorage.getItem('hour')!) : 0;
   minute: number = localStorage.getItem('minute') ? parseInt(localStorage.getItem('minute')!) : 0;
-  second: number = localStorage.getItem('second') ? parseInt(localStorage.getItem('second')!) : 0;
 
-  targetDate: Date = new Date(this.year, this.month, this.day, this.hour, this.minute, this.second);
+  targetDate: Date = new Date(this.year, this.month, this.day, this.hour, this.minute);
   currentDate: Date = new Date();
   secondsBetween: number = Math.floor((this.targetDate.getTime() - this.currentDate.getTime())/1000);
   daysLeft = Math.floor(this.secondsBetween / 86400).toString();
@@ -37,6 +36,15 @@ export class AppComponent {
     let secondInput = document.getElementById("second") as HTMLInputElement | null;
     secondInput ? secondInput.value = this.targetDate.getSeconds().toString() : null;
     this.calculate();
+
+    if(this.targetDate.getHours() < 10){
+      let hourInput = document.getElementById("hour") as HTMLInputElement | null;
+      hourInput ? hourInput.value = '0' + this.targetDate.getHours().toString() : null;
+    }
+    if(this.targetDate.getMinutes() < 10){
+      let hourInput = document.getElementById("minute") as HTMLInputElement | null;
+      hourInput ? hourInput.value = '0' + this.targetDate.getMinutes().toString() : null;
+    }
   }
 
   setMonth(event: any) {
@@ -127,6 +135,10 @@ export class AppComponent {
       this.localStorageChange('hour', event.target.value);
       console.log(this.targetDate);
     }
+    if(this.targetDate.getHours() < 10){
+      let hourInput = document.getElementById("hour") as HTMLInputElement | null;
+      hourInput ? hourInput.value = '0' + this.targetDate.getHours().toString() : null;
+    }
     this.calculate();
   }
 
@@ -140,20 +152,11 @@ export class AppComponent {
       this.localStorageChange('minute', event.target.value);
       console.log(this.targetDate);
     }
-    this.calculate();
-  }
-
-  setSecond(event: any) {
-    if(event.target.value < 0 || event.target.value > 59) {
-      alert("Invalid Second Input");
-      let secondInput = document.getElementById("second") as HTMLInputElement | null;
-      secondInput ? secondInput.value = this.targetDate.getSeconds().toString() : null;
-    } else {
-      this.targetDate.setSeconds(event.target.value);
-      this.localStorageChange('second', event.target.value);
-      console.log(this.targetDate);
+    if(this.targetDate.getMinutes() < 10){
+      let hourInput = document.getElementById("minute") as HTMLInputElement | null;
+      hourInput ? hourInput.value = '0' + this.targetDate.getMinutes().toString() : null;
     }
-    this.calculate()
+    this.calculate();
   }
 
   updateSeconds() {

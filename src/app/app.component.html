@@ -1,7 +1,7 @@
 <div class="title">TIME REMAINING UNTIL</div>
 <div class="input">
   <div class="dayinput">
-    <div class="monthDiv">
+    <div class="monthDiv in">
       <select name="months" (change)="setMonth($event)" id="month">
         <option value="0">Jan</option>
         <option value="1">Feb</option>
@@ -24,19 +24,15 @@
       <input type="number" min="new Date().getFullYear()" max="2037" value="2024" (change)="setYear($event)" id="year">
     </div>
   </div>
+  <div class="at">at</div>
   <div class="timeinput">
     <div class="hourDiv">
       <input type="number" min="0" max="23" value="0" (change)="setHour($event)" id="hour">
     </div>
-    <div>HR:</div>
+    <div class="dots">:</div>
     <div class="minuteDiv">
       <input type="number" min="0" max="59" value="0" (change)="setMinute($event)" id="minute">
     </div>
-    <div>MIN:</div>
-    <div class="secondDiv">
-      <input type="number" min="0" max="59" value="0" (change)="setSecond($event)" id="second">
-    </div>
-    <div>SEC</div>
   </div>
 </div>
 <div class="display">
